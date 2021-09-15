@@ -1,0 +1,14 @@
+cd "C:\Program Files\Firebird\Firebird_2_5\bin\"
+gfix -v -f C:\Windows\MGFolha\MGFP01.fdb -user SYSDBA -pass masterkey
+pause
+rem Correção da corrupção da base
+gfix -m -i C:\Windows\MGFolha\MGFP01.fdb -user SYSDBA -pass masterkey
+pause
+rem Realização de backup da base
+gbak -g -b -z -l -v c:\windows\MGFolha\MGFP01.fdb c:\windows\MGFolha\MGFP01.gbk -user SYSDBA -pass masterkey
+pause
+rem Restauração de backup da base
+gbak -rep -g -c -z -v c:\windows\MGFolha\MGFP01.gbk c:\windows\MGFolha\MGFP01.fdb -user SYSDBA -pass masterkey
+pause
+del C:\Windows\MGFolha\MGFP01bkp.fdb
+pause
